@@ -1,14 +1,5 @@
-// date
-function formatDate(timestrap) {
-  let date=new Date(timestrap);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
   let days = [
     "Sunday",
@@ -20,9 +11,23 @@ function formatDate(timestrap) {
     "Saturday"
   ];
   let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes}`;
-
+  return `${day} ${formatHours(timestamp)}`;
 }
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 // let weather function
 function displayTemperature(response) {
 //console.log(response.data);   
@@ -46,6 +51,7 @@ function displayTemperature(response) {
        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
    );
    iconElement.setAttribute("alt", response.data.weather[0].description); //alt
+  celsiusTemperature = response.data.main.temp;
 }
 // show searched location
 function search(city) {
@@ -61,8 +67,8 @@ function handleSubmit(event){
 }
 
 //to celsius
-
-function celsiusConversion(response) {
+function celsiusConversion(event) {
+  event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   let temperature = temperatureElement.innerHTML;
   temperatureElement.innerHTML = Math.round(((temperature - 32) * 5) / 9);
@@ -71,9 +77,9 @@ function celsiusConversion(response) {
 let celsius = document.querySelector("#celsius-link");
 celsius.addEventListener("click", celsiusConversion);
 
-// to fahrenheit
-
+//to fahrenheit
 function fahrenheitConversion(event) {
+  event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   let temperature = temperatureElement.innerHTML;
   temperatureElement.innerHTML = Math.round((temperature * 9) / 5 + 32);
