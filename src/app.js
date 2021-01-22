@@ -24,7 +24,7 @@ function formatDate(timestrap) {
 }
 
 function displayTemperature(response) {
-console.log(response.data);    //mozemy sobie wpisywac zeby pozniej wyszukiwac rzeczy w kodzie
+//console.log(response.data);   
    let temperatureElement=document.querySelector("#temperature");
    let cityElement=document.querySelector("#city");
    let descriptionElement=document.querySelector("#description");
@@ -55,4 +55,4 @@ let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
 
   
 
-axios.get(apiUrl).then(displayTemperature)
+axios.get(apiUrl).then(displayTemperature);
