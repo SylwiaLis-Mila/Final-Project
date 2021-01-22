@@ -47,12 +47,19 @@ function displayTemperature(response) {
    iconElement.setAttribute("alt", response.data.weather[0].description); //alt
 }
 
+function search(city) {
 let apiKey = "f58a3da8d9e0f160ba2b997349a49f23";
-let city="Majorca";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-
-
-  
-
 axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event){
+  event.preventDefault();
+  let cityInputElement=document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+let form=document.querySelector("#search-form");
+form.addEventListener("submit",handleSubmit);
+
+search("New York");
