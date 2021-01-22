@@ -1,7 +1,14 @@
-function formatDate(timestamp) {
-  let date = new Date(timestamp);
-
-  let days = [
+function formatDate(timestrap){
+  let date=new Date(timestrap);
+    let hours=date.getHours();
+    let minutes=date.getMinutes();
+    if(hours < 10){
+      hours=`0${minutes}`;
+    }
+     if(minutes < 10){
+      minutes=`0${minutes}`;
+    }
+     let days = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -10,24 +17,9 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday"
   ];
-  let day = days[date.getDay()];
-  return `${day} ${formatHours(timestamp)}`;
+    let day=days[date.getDay ()];
+    return `${day} ${hours}:${minutes}`;
 }
-
-function formatHours(timestamp) {
-  let date = new Date(timestamp);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  return `${hours}:${minutes}`;
-}
-
 // let weather function
 function displayTemperature(response) {
 //console.log(response.data);   
@@ -65,6 +57,21 @@ function handleSubmit(event){
   let cityInputElement=document.querySelector("#city-input");
   search(cityInputElement.value);
 }
+function searchLocation(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "f58a3da8d9e0f160ba2b997349a49f23";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(`${apiUrl}`).then(displayTemperature);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+
 
 //to celsius
 function celsiusConversion(event) {
@@ -84,6 +91,8 @@ function fahrenheitConversion(event) {
   let temperature = temperatureElement.innerHTML;
   temperatureElement.innerHTML = Math.round((temperature * 9) / 5 + 32);
 }
+let currentLocation = document.querySelector("#currentLocation");
+currentLocation.addEventListener("click", getCurrentLocation);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", fahrenheitConversion);
