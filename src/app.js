@@ -57,6 +57,8 @@ function handleSubmit(event){
   let cityInputElement=document.querySelector("#city-input");
   search(cityInputElement.value);
 }
+
+// let current location
 function searchLocation(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -70,7 +72,6 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
-
 
 
 //to celsius
