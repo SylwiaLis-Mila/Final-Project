@@ -10,6 +10,10 @@ h1 {
   margin-bottom: 0;
 }
 
+h5 {
+  margin: 0 auto;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -52,4 +56,12 @@ li:first-letter {
 #fahrenheit-link {
   color: black;
   font-size: 25px;
+}
+
+.col-2 {
+  text-align: center;
+}
+.temperature-forest {
+  font-size: 20px;
+  font: bold;
 }
