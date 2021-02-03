@@ -20,6 +20,20 @@ function formatDate(timestrap){
     let day=days[date.getDay ()];
     return `${day} ${hours}:${minutes}`;
 }
+
+// to forecast hours
+ function formatHours(timestrap) {
+   let date=new Date(timestrap);
+    let hours=date.getHours();
+    let minutes=date.getMinutes();
+    if(hours < 10){
+      hours=`0${minutes}`;
+    }
+     if(minutes < 10){
+      minutes=`0${minutes}`;
+    }
+   return `${hours}:${minutes}`;
+ }
 // let weather function
 function displayTemperature(response) {
 //console.log(response.data);   
@@ -49,29 +63,29 @@ function displayTemperature(response) {
 //forecast
 function displayForecast(response){
   let forecastElement=document.querySelector("#forecast");
-  forecastElement.innerHTML=null,
-  let forecast= null;
-  
-  for (let index=0; index < 6; indexx++){
-    forecast=response.data.list[index];
+  forecastElement.innerHTML=null;
+ let forecast=null;
+ 
+      for (let index=0; index< 12; indexx++){
+      forecast=response.data.list[index];
 
-    forecastElement.innerHTML+=`<div class="col-2">
-                            <h5>
-                                Friday
-                            </h5>
-                            <div class="img-forest">
-                                <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
-                            </div>
-                            
-                            <div class="temperature-forest">
-                             <strong> ${Math.round(forecast.main.temp_max)}° </strong> 
-                              ${Math.round(forecast.main.temp_min)}°
-                            </div>
-                        </div>`;
+      forecastElement.innerHTML+=`<div class="col-2">
+                                <h5>
+                                  ${formatHours(forecast.dt*1000)}
+                                </h5>
+                                <div class="img-forest">
+                                    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
+                                </div>
+                                
+                                <div class="temperature-forest">
+                                <strong> ${Math.round(forecast.main.temp_max)}° </strong> 
+                                  ${Math.round(forecast.main.temp_min)}°
+                                </div>
+                            </div>`;
+      }
+      
   }
 
-  
-}
 
 // show searched location
 function search(city) {
