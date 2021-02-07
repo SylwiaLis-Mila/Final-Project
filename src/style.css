@@ -64,4 +64,5 @@ li:first-letter {
 .temperature-forest {
   font-size: 20px;
   font: bold;
+  text-align: center;
 }

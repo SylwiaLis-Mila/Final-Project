@@ -34,6 +34,7 @@ function formatDate(timestrap){
     }
    return `${hours}:${minutes}`;
  }
+ 
 // let weather function
 function displayTemperature(response) {
 //console.log(response.data);   
@@ -78,12 +79,11 @@ function displayForecast(response){
                                 </div>
                                 
                                 <div class="temperature-forest">
-                                <strong> ${Math.round(forecast.main.temp_max)}° </strong> 
-                                  ${Math.round(forecast.main.temp_min)}°
+                                <strong><span class="forecast-max">${Math.round(forecast.main.temp_max)}° </strong> 
+                                <span class="forecast-max">${Math.round(forecast.main.temp_min)}°
                                 </div>
                             </div>`;
-      }
-      
+      } 
   }
 
 
@@ -119,14 +119,28 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-
 //to celsius
 function celsiusConversion(event) {
   event.preventDefault();
-   celsius.classList.add("active");
+  celsius.classList.add("active");
   fahrenheit.classList.remove("active");
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+
+  let forecastMax = document.querySelectorAll(".forecast-max");
+  forecastMax.forEach(function (item) {
+  let currentTemperature = item.innerHTML;
+  item.innerHTML = Math.round(((currentTemperature - 32) * 5) / 9);
+  });
+
+  let forecastMin = document.querySelectorAll(".forecast-min");
+  forecastMin.forEach(function (item) {
+  let currentTemperature = item.innerHTML;
+  item.innerHTML = Math.round(((currentTemperature - 32) * 5) / 9);
+  celsius.removeEventListener("click", celsiusConversion);
+  fahrenheit.addEventListener("click", fahrenheitConversion);
+  });
 }
 
 //to fahrenheit
@@ -137,7 +151,23 @@ function fahrenheitConversion(event) {
   fahrenheit.classList.add("active");
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+  let forecastMax = document.querySelectorAll(".forecast-max");
+  forecastMax.forEach(function (item) {
+  let currentTemperature = item.innerHTML;
+  item.innerHTML = Math.round((currentTemperature * 9) / 5 + 32);
+  });
+
+  let forecastMin = document.querySelectorAll(".forecast-min");
+  forecastMin.forEach(function (item) {
+  let currentTemperature = item.innerHTML;
+  item.innerHTML = Math.round((currentTemperature * 9) / 5 + 32);
+
+  celsius.addEventListener("click", celsiusConversion);
+  fahrenheit.removeEventListener("click", fahrenheitConversion);
+  });
 }
+
 let currentLocation = document.querySelector("#currentLocation");
 currentLocation.addEventListener("click", getCurrentLocation);
 
@@ -154,4 +184,4 @@ fahrenheit.addEventListener("click", fahrenheitConversion);
 
 
 
-search("New York");
+search("Stuttgart");
