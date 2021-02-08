@@ -8,10 +8,12 @@ h1 {
   font-weight: 100;
   line-height: 50px;
   margin-bottom: 0;
+  font: bold;
 }
 
 h5 {
-  margin: 0 auto;
+  text-align: center;
+  font: bold;
 }
 
 ul {
@@ -47,7 +49,7 @@ li:first-letter {
 }
 
 #temperature {
-  font-size: 50px;
+  font-size: 60px;
 }
 #celsius-link {
   color: black;
@@ -59,10 +61,10 @@ li:first-letter {
 }
 
 .col-2 {
-  text-align: center;
+  text-align: right;
 }
 .temperature-forest {
   font-size: 20px;
   font: bold;
-  text-align: center;
+  text-align: right;
 }
