@@ -79,8 +79,8 @@ function displayForecast(response){
                                 </div>
                                 
                                 <div class="temperature-forest">
-                                <strong><span class="forecast-max">${Math.round(forecast.main.temp_max)}° </strong> 
-                                <span class="forecast-max">${Math.round(forecast.main.temp_min)}°
+                                <strong><span class="forecast-max">${Math.round(forecast.main.temp_max)}</span>° </strong> 
+                                <span class="forecast-max">${Math.round(forecast.main.temp_min)}</span>°
                                 </div>
                             </div>`;
       } 
@@ -138,6 +138,7 @@ function celsiusConversion(event) {
   forecastMin.forEach(function (item) {
   let currentTemperature = item.innerHTML;
   item.innerHTML = Math.round(((currentTemperature - 32) * 5) / 9);
+
   celsius.removeEventListener("click", celsiusConversion);
   fahrenheit.addEventListener("click", fahrenheitConversion);
   });
@@ -149,6 +150,7 @@ function fahrenheitConversion(event) {
   let temperatureElement = document.querySelector("#temperature");
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
+   
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 
