@@ -138,10 +138,9 @@ function celsiusConversion(event) {
   forecastMin.forEach(function (item) {
   let currentTemperature = item.innerHTML;
   item.innerHTML = Math.round(((currentTemperature - 32) * 5) / 9);
-
+  });
   celsius.removeEventListener("click", celsiusConversion);
   fahrenheit.addEventListener("click", fahrenheitConversion);
-  });
 }
 
 //to fahrenheit
@@ -164,10 +163,9 @@ function fahrenheitConversion(event) {
   forecastMin.forEach(function (item) {
   let currentTemperature = item.innerHTML;
   item.innerHTML = Math.round((currentTemperature * 9) / 5 + 32);
-
-  celsius.addEventListener("click", celsiusConversion);
-  fahrenheit.removeEventListener("click", fahrenheitConversion);
   });
+   celsius.addEventListener("click", celsiusConversion);
+  fahrenheit.removeEventListener("click", fahrenheitConversion);
 }
 
 let currentLocation = document.querySelector("#currentLocation");
