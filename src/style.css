@@ -4,11 +4,8 @@ body {
 
 h1 {
   color: black;
-  font-size: 40px;
-  font-weight: 100;
-  line-height: 50px;
+  font-size: 50px;
   margin-bottom: 0;
-  font: bold;
 }
 
 h5 {
@@ -34,6 +31,9 @@ li {
 
 li:first-letter {
   text-transform: capitalize;
+}
+hr: {
+  color: goldenrod;
 }
 
 .weather-app-wrapper {
@@ -62,9 +62,19 @@ li:first-letter {
 
 .col-2 {
   text-align: right;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .temperature-forest {
   font-size: 20px;
-  font: bold;
-  text-align: right;
+  text-align: center;
+}
+
+#time-forecast {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.img-forest {
+  max-width: 80px;
 }
